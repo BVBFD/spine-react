@@ -1,18 +1,34 @@
 import './App.css';
-import React, { useEffect } from 'react';
-import { SpineCanvasRenderer, LoadSpineAnimation } from './spine';
+import React, { useEffect, useState } from 'react';
+import { LoadSpineAnimation, SpineCanvasRenderer } from './spine';
 
 const App = (props) => {
+  const [spineData, setSpineData] = useState();
+
   useEffect(() => {
-    LoadSpineAnimation('../assets/', 'spineboy.atlas', 'spineboy-ess.json');
+    setSpineData(
+      LoadSpineAnimation(
+        'spineboy',
+        '../assets/spineboy/',
+        'spineboy.atlas',
+        'spineboy-ess.json'
+      )
+    );
   }, []);
 
   return (
-    <div>
-      {SpineCanvasRenderer({
-        width: '100%',
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         height: '100vh',
-        background: '#333',
+      }}
+    >
+      {SpineCanvasRenderer('spineboy', {
+        width: '20rem',
+        height: '20rem',
+        background: 'transparent',
       })}
     </div>
   );

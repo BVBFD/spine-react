@@ -8,7 +8,12 @@ import {
   AnimationState,
 } from '@esotericsoftware/spine-canvas';
 
-export const LoadSpineAnimation = (assetsLocalUrl, atlasFile, jsonFile) => {
+export const LoadSpineAnimation = (
+  spineAnimName,
+  assetsLocalUrl,
+  atlasFile,
+  jsonFile
+) => {
   let lastFrameTime = Date.now() / 1000;
   let canvas, context;
   let assetManager;
@@ -16,7 +21,7 @@ export const LoadSpineAnimation = (assetsLocalUrl, atlasFile, jsonFile) => {
   let skeletonRenderer;
 
   async function load() {
-    canvas = document.getElementById('canvas');
+    canvas = document.getElementById(`${spineAnimName}canvas`);
     context = canvas.getContext('2d');
     skeletonRenderer = new SkeletonRenderer(context);
 
@@ -89,6 +94,6 @@ export const LoadSpineAnimation = (assetsLocalUrl, atlasFile, jsonFile) => {
   load();
 };
 
-export const SpineCanvasRenderer = (styleObj) => {
-  return <canvas id='canvas' style={styleObj}></canvas>;
+export const SpineCanvasRenderer = (spineAnimName, styleObj) => {
+  return <canvas id={spineAnimName + 'canvas'} style={styleObj}></canvas>;
 };
